@@ -1963,7 +1963,7 @@ const resetExperience = () => {
 
 sidebarLeftBtn?.addEventListener("click", () => {
   if (currentStep === 0) {
-    window.location.href = "viewer.html?from=editor";
+    window.location.href = "index.html?from=editor";
     return;
   }
   if (currentStep === 1) {
@@ -2055,7 +2055,7 @@ thankYouSubmitBtn?.addEventListener("click", async () => {
   try {
     const id = await saveSubmission();
     if (id) {
-      window.location.href = "viewer.html?from=submission";
+      window.location.href = "index.html?from=submission";
       return;
     }
     showToast("Unable to save right now. Please try again.");

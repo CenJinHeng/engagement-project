@@ -714,7 +714,7 @@ const hideIntro = () => {
 
 introEnterMapBtn?.addEventListener("click", hideIntro);
 introEnterGameBtn?.addEventListener("click", () => {
-  window.location.href = "index.html";
+  window.location.href = "design.html";
 });
 
 introOverlay?.addEventListener("click", (e) => {
@@ -722,7 +722,7 @@ introOverlay?.addEventListener("click", (e) => {
 });
 
 enterGameBtn?.addEventListener("click", () => {
-  window.location.href = "index.html";
+  window.location.href = "design.html";
 });
 
 if (shouldSkipIntro) {

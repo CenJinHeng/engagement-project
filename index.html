@@ -3,88 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Engagement Dashboard</title>
-
+  <title>Engagement Map Viewer</title>
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     crossorigin=""
   />
-
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="viewer.css" />
 </head>
 <body>
-  <div id="map" aria-label="Map centered on Philadelphia"></div>
-
-  <div id="thank-you-overlay" class="thank-you-overlay hidden" aria-hidden="true">
-    <div class="thank-you-card">
-      <div class="thank-you-letter" style="background-image: url('pic/thankyouletter.png');">
-        <button type="button" id="thank-you-download" class="thank-you-download" aria-label="Download thank you letter">
-          <img src="pic/xiazai.png" alt="Download" />
-        </button>
-        <div id="thank-you-content" class="thank-you-letter-inner">
-          <div class="thank-you-stack">
-            <h3 class="thank-you-heading">Thank you for contribution</h3>
-            <div class="thank-you-body">
-              <label class="thank-you-dear">
-                Dear
-                <input type="text" id="nickname-input" class="thank-you-dear-input" placeholder="your name" />
-                ,
-              </label>
-              <p class="thank-you-message">
-                Thanks for sharing your routes and memories—every stop makes the map lively and personal, and helps people discover Philadelphia's street culture. We'll keep improving; stay curious, invite friends to explore, and keep telling stories that celebrate this community.
-              </p>
-              <p class="thank-you-org">Philadelphia Community History & Culture Organization</p>
-            </div>
-          </div>
+  <div id="viewer-intro" class="intro-overlay">
+    <div class="intro-card">
+      <h2>Tour Design Game</h2>
+      <p class="intro-description">
+        Philadelphia, once the nation's capital and the home of the Declaration of Independence,
+        draws thousands of visitors. Beyond museums and other formal sites, the historic
+        neighborhoods nearby have informal stories and everyday culture worth exploring. Community
+        spirit and history can enrich the official narrative. That's why your perspective matters to
+        us! <strong>Tell us the places in your neighborhood that make you proud and deserve a
+        spotlight, and what the planning department could do to elevate them.</strong><br /><br />
+        You can join the tour design game to share your ideas, or jump into the map to see what
+        others have created.
+      </p>
+      <div class="intro-choice-grid">
+        <div
+          class="intro-choice-card"
+          data-target-button="viewer-enter-map"
+          role="button"
+          tabindex="0"
+          aria-label="Enter the map"
+        >
+          <img src="pic/map.png" alt="Community map illustration" class="intro-choice-image" />
+          <button id="viewer-enter-map" type="button" class="intro-choice-btn ghost-btn">
+            Enter the map
+          </button>
+          <p class="intro-choice-desc">See tours created by your community members.</p>
+        </div>
+        <div
+          class="intro-choice-card"
+          data-target-button="viewer-enter-game"
+          role="button"
+          tabindex="0"
+          aria-label="Tour design game"
+        >
+          <img src="pic/design.png" alt="Design the tour illustration" class="intro-choice-image" />
+          <button id="viewer-enter-game" type="button" class="intro-choice-btn primary-btn">
+            Tour design game
+          </button>
+          <p class="intro-choice-desc">
+            Imagine guiding your friends through your neighborhood, how would you design the tour?
+          </p>
         </div>
       </div>
-      <div class="thank-you-actions">
-        <button type="button" id="thank-you-back" class="ghost-btn">Back to Edit</button>
-        <button type="button" id="thank-you-submit" class="primary-btn">Submit</button>
-      </div>
-      <label class="nickname-visibility">
-        <input type="checkbox" id="nickname-visible" />
-        Allow using name to publish the route on the public map
-      </label>
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar hidden">
-    <div class="sidebar-progress">
-      <div class="progress-track">
-        <div class="progress-node" data-step="0">
-          <span class="progress-circle"></span>
-          <span class="progress-caption">Select stops</span>
-        </div>
-        <div class="progress-line" data-line="0"></div>
-        <div class="progress-node" data-step="1">
-          <span class="progress-circle"></span>
-          <span class="progress-caption">Draw routes</span>
-        </div>
-        <div class="progress-line" data-line="1"></div>
-        <div class="progress-node" data-step="2">
-          <span class="progress-circle"></span>
-          <span class="progress-caption">Suggest</span>
-        </div>
-      </div>
+  <main class="viz-main">
+    <div class="viz-controls">
+      <aside class="viz-sidebar">
+        <h3 class="viz-sidebar-title">Tour design game</h3>
+        <p class="viz-sidebar-desc">
+          Imagine guiding your friends through your neighborhood,how would you design the tour?
+        </p>
+        <button id="viz-enter-game" class="primary-btn" type="button">Go</button>
+      </aside>
+      <aside class="viz-leftbar">
+        <h3 class="viz-leftbar-title">Tour List</h3>
+        <p class="viz-leftbar-sub">Tours designed by community members</p>
+        <div id="trail-list" class="trail-list"></div>
+      </aside>
     </div>
-
-    <div id="sidebar-toast" class="sidebar-toast hidden" role="status" aria-live="polite"></div>
-
-    <div id="sidebar-content" class="sidebar-content"></div>
-
-    <div class="sidebar-footer">
-      <button id="sidebar-left-btn" type="button" class="ghost-btn full-width">Exit</button>
-      <button id="sidebar-right-btn" type="button" class="primary-btn full-width" disabled>Next</button>
+    <div id="viz-map" aria-label="Submission map"></div>
+    <aside id="trail-detail" class="trail-detail hidden"></aside>
+    <div class="viz-legend">
+      <div class="legend-row"><span class="legend-swatch legend-stop"></span>Stop</div>
+      <div class="legend-row"><span class="legend-swatch legend-route"></span>Route</div>
     </div>
-  </div>
+  </main>
 
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     crossorigin=""
   ></script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script type="module" src="main.js"></script>
+  <script type="module" src="viewer.js"></script>
 </body>
 </html>
