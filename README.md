@@ -12,7 +12,7 @@ To make this possible, the goal of this project is to collect valuable local kno
 
 # Dashboard Design
 This project has two main challenges:
-1) The information we want to collect is abstract (Questions like: Which location has the strongest sense of place?; Which place means the most to you? )—how do we help users understand what we’re asking for?  
+1) The information we want to collect is abstract (Questions like: Which location has the strongest sense of place? Which place means the most to you? )—how do we help users understand what we’re asking for?  
 2) The information we are trying to collect is much (where, why, and how to improve), which can feel long and tiring to complete.
 
 Our solution is to use **gamified, scenario-based language and interactions** to make participation easier and more engaging. Users are invited to imagine taking a friend on a neighborhood walk: they plan stops and routes, explain why they chose them, and suggest what could be improved to make the experience better.
