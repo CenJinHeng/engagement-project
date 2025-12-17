@@ -20,4 +20,5 @@ Our solution is to use **gamified, scenario-based language and interactions** to
 We also included a **Thank You Card** step: after users finish designing and submiting a tour, they will see a thank-you message where they can enter their name and download a thank-you card image. This positive feedback helps users feel the meaning and impact of their contribution.
 
 # Statement
-AI was used to help develop some features in this project, and all AI-generated outputs were reviewed and confirmed by the team.
+- ⚠️ Our dashboard displays user- generated content that has not undergone review, potentially posing content management risks.
+- AI was used to help develop some features in this project, and all AI-generated outputs were reviewed and confirmed by the team.
